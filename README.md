@@ -19,4 +19,4 @@ Then type in the edges in the format of vertice1 vertice2 cost line by line for 
 then it will run the above functions.
 
 
-###### [my wordress](http://imagemlt.icebluecraft.online)
+###### [My Wordpress](http://imagemlt.icebluecraft.online)
