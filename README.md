@@ -2,7 +2,7 @@
 
 >this script contains a simple graph and some useful functions
 
-##function list
+### function list
 >BFS<br>
 >DFS<br>
 >Kruskal<br>
@@ -11,4 +11,4 @@
 >Bellman-Ford<br>
 >Floyd
 
-###[my wordress](http://imagemlt.icebluecraft.online)
+###### [my wordress](http://imagemlt.icebluecraft.online)
