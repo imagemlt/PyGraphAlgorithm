@@ -30,29 +30,36 @@ def BFS(V,E,start):
 		color[p]=1
 	return depth
 
+time=0
+
 def DFS_start(V,E):
+        global time
 	color=[]
-	depth=[]
-	time=0
+	startTime=[]
+        finishTime=[]
 	for i in range(0,len(V)):
 		color.append(-1)
-		depth.append(0)
+		startTime.append(0)
+                finishTime.append(0)
 	for i in V:
 		if color[V.index(i)]==-1:
-			DFS(V,E,color,time,depth,i)
-	return depth
+			DFS(V,E,color,startTime,finishTime,i)
+	return startTime,finishTime
 
-def DFS(V,E,color,time,depth,i):
-	depth[V.index(i)]=time
-	print " "*depth[V.index(i)],
+def DFS(V,E,color,startTime,finishTime,i):
+        global time
+        time=time+1
+	startTime[V.index(i)]=time
+	print " "*startTime[V.index(i)],
 	print i
 	color[V.index(i)]=0
 	if E.has_key(i):
 		for m in E[i]:
 			if color[V.index(m[1])]==-1:
-				time=time+1
-				DFS(V,E,color,time,depth,m[1])
+				DFS(V,E,color,startTime,finishTime,m[1])
 	color[i]=1	
+        time=time+1
+        finishTime[V.index(i)]=time
 
 
 def Kruskal(V,E):
