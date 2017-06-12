@@ -5,6 +5,8 @@ This script contains a simple graph and some useful functions
 ### Function List
 + BFS
 + DFS
++ TopologicalSort\_indgree
++ TopologicalSort\_dfs
 + Kruskal
 + Prim
 + Dijikstra
