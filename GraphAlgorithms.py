@@ -62,6 +62,58 @@ def DFS(V,E,color,startTime,finishTime,i):
         finishTime[V.index(i)]=time
 
 
+def TopologicalSort(V,E):
+    indegree=[0]*len(V)
+    visited=[]
+    for i in E:
+        for j in E[i]:
+            indegree[V.index(j[1])]=indegree[V.index(j[1])]+1
+    while 0 in indegree:
+            pos=indegree.index(0)
+            visited.append(V[pos])
+            if E.has_key(V[pos]):
+                for j in E[V[pos]]:
+                    indegree[j[1]]=indegree[j[1]]-1
+            indegree[pos]=-1
+    return visited
+                
+
+def TopologicalSort_dfs(V,E):
+    indgree=[0]*len(V)
+    visited=[]
+    color=[0]*len(V)
+    for i in E:
+        for j in E[i]:
+            indgree[V.index(j[1])]=indgree[V.index(j[1])]+1
+    begin=indgree.index(0)
+    if 0 not in indgree:
+        return []
+    Queue=[]
+    for begin in range(0,len(indgree)):
+        if indgree[begin]==0:
+            Queue.append(begin)
+            while len(Queue)>0:
+                current=Queue.pop(0)
+                flag=False
+                if E.has_key(V[current]):
+                    for i in E[V[current]]:
+                        if color[i[1]] is not 1:
+                            flag=True
+                            if color[V.index(i[1])] is not -1:
+                                Queue.append(V.index(i[1]))
+                                color[V.index(i[1])]=-1
+                            break
+                if not flag:
+                    visited.insert(0,V[current])
+                    color[current]=1
+                else:
+                    Queue.append(V[current])
+                    color[current]=-1
+    return visited
+
+
+
+
 def Kruskal(V,E):
 	visited=[]
 	visited_joined=[]
@@ -243,8 +295,15 @@ def main():
 	print "\nBFS:"
 	BFS(V,E,0)
 	print "\nDFS:"
-	DFS_start(V,E)
-	print "\nPrim:"
+	firstTime,lastTime=DFS_start(V,E)
+        for i in range(0,len(V)):
+            print "%d,%4d,%4d"%(V[i],firstTime[i],lastTime[i])
+        print "ToplogicalSort:"
+        print TopologicalSort(V,E)
+        print "TopologicalSort:dfs"
+        print TopologicalSort_dfs(V,E)
+        
+        print "\nPrim:"
 	print Prim(V,E)
 	print "\nKruskal:"
 	print Kruskal(V,E)
