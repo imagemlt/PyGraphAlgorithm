@@ -13,8 +13,7 @@ This script contains a simple graph and some useful functions
 
 ### Usage
 First,type in the vertices ,-1 for an end;  
-Then type in the edges in the format of vertice1 vertice2 cost line by line,
-* for an end;  
+Then type in the edges in the format of vertice1 vertice2 cost line by line for an end;  
 then it will run the above functions.
 
 
