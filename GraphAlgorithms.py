@@ -85,7 +85,6 @@ def TopologicalSort_dfs(V,E):
     for i in E:
         for j in E[i]:
             indgree[V.index(j[1])]=indgree[V.index(j[1])]+1
-    begin=indgree.index(0)
     if 0 not in indgree:
         return []
     Queue=[]
@@ -116,7 +115,7 @@ def TopologicalSort_dfs(V,E):
 
 def Kruskal(V,E):
 	visited=[]
-	visited_joined=[]
+	visitedpoints=[]
 	notvisited=[]
 	for m in E:
 		for n in E[m]:
@@ -127,29 +126,17 @@ def Kruskal(V,E):
 			if j[2]<temp[2]:
 				temp=j
 		notvisited.pop(notvisited.index(temp))
-		flag=True
-		for i in visited_joined:
-			if (temp[0]==i[0] and temp[1]==i[1]) or (temp[0]==i[1] and temp[1]==i[0]):
-				flag=False
-		if flag:
+                if visitedpoints.count(temp[0])+visitedpoints.count(temp[1])<2:
 			visited.append(temp)
-			n=0
-			for t in visited_joined:
-				if t[1]==k[1]:
-					n=n+1
-				if t[0]==k[1]:
-					n=n+1
-				if t[1]==k[0]:
-					n=n+1
-				if t[1]==k[1]:
-					n=n+1
-			if n==2:
-				visited_joined.append(temp)			
+                        for i in temp[0],temp[1]:
+                            if not i in visitedpoints:
+			        visitedpoints.append(i)			
 	return visited
 
 def Prim(V,E):
 	visited=[]
-	notvisited=[]
+	visitedpoints=[]
+        notvisited=[]
 	for m in E:
 		for n in E[m]:
 			notvisited.append(n)
@@ -159,16 +146,7 @@ def Prim(V,E):
 			flag=False
 			if len(visited)==0:
 				flag=True
-			n=0
-			for k in visited:
-				if k[0]==j[0]:
-					n=n+1
-				if k[1]==j[0]:
-					n=n+1
-				if k[0]==j[1]:
-					n=n+1
-				if k[1]==j[1]:
-					n=n+1
+			n=visitedpoints.count(j[0])+visitedpoints.count(j[1])
 			if n==1:
 				flag=True
 			if j[2]<temp[2] and flag:
@@ -176,6 +154,9 @@ def Prim(V,E):
 		if temp[2]==65535:
 			continue
 		visited.append(temp)
+                for m in temp[0],temp[1]:
+                    if m not in visitedpoints:
+                        visitedpoints.append(m)
 		notvisited.pop(notvisited.index(temp))
 	return visited
 			
