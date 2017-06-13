@@ -9,11 +9,8 @@ def getWeight(V,E,u,v):
 	return 100000
 
 def BFS(V,E,start):
-	color=[]
-	depth=[]
-	for i in range(0,len(V)):
-		color.append(-1)
-		depth.append(0)
+	color=[-1]*len(V)
+	depth=[0]*len(V)
 	queue=[]
 	queue.append(start)
 	color[start]=0
@@ -34,13 +31,9 @@ time=0
 
 def DFS_start(V,E):
         global time
-	color=[]
-	startTime=[]
-        finishTime=[]
-	for i in range(0,len(V)):
-		color.append(-1)
-		startTime.append(0)
-                finishTime.append(0)
+	color=[-1]*len(V)
+	startTime=[0]*len(V)
+        finishTime=[0]*len(V)
 	for i in V:
 		if color[V.index(i)]==-1:
 			DFS(V,E,color,startTime,finishTime,i)
@@ -75,6 +68,8 @@ def TopologicalSort(V,E):
                 for j in E[V[pos]]:
                     indegree[j[1]]=indegree[j[1]]-1
             indegree[pos]=-1
+    if len(visited)<len(V):
+        return []
     return visited
                 
 
@@ -96,7 +91,7 @@ def TopologicalSort_dfs(V,E):
                 flag=False
                 if E.has_key(V[current]):
                     for i in E[V[current]]:
-                        if color[i[1]] is not 1:
+                        if color[V.index(i[1])] is not 1:
                             flag=True
                             if color[V.index(i[1])] is not -1:
                                 Queue.append(V.index(i[1]))
@@ -163,18 +158,15 @@ def Prim(V,E):
 	
 	
 def Dijikstra(V,E,begin):
-	visited=[]
-	length=[]
-	path=[]
+	visited=[False]*len(V)
+	length=[0]*len(V)
+	path=[0]*len(V)
 	for i in range(0,len(V)):
 		visited.append(False)
 	for j in range(0,len(V)):
 		if j is not begin:
-			length.append(getWeight(V,E,V[begin],V[j]))
-			path.append(begin)
-		else:
-			length.append(0)
-			path.append(0)
+			length[j]=getWeight(V,E,V[begin],V[j])
+			path[j]=begin
 	while False in visited:
 		min=100000
 		pos=-1
@@ -194,15 +186,12 @@ def Dijikstra(V,E,begin):
 
 
 def Bellman_Ford(V,E,begin):
-	path=[]
-	length=[]
+	path=[0]*len(V)
+	length=[0]*len(V)
 	for j in range(0,len(V)):
 		if j is not begin:
-			length.append(getWeight(V,E,V[begin],V[j]))
-			path.append(begin)
-		else:
-			length.append(0)
-			path.append(0)
+			length[j]=getWeight(V,E,V[begin],V[j])
+			path[j]=begin
 	for i in range(0,len(V)):
 		for j in range(0,len(V)):
 			for k in range(0,len(V)):
@@ -280,9 +269,11 @@ def main():
         for i in range(0,len(V)):
             print "%d,%4d,%4d"%(V[i],firstTime[i],lastTime[i])
         print "ToplogicalSort:"
-        print TopologicalSort(V,E)
-        print "TopologicalSort:dfs"
-        print TopologicalSort_dfs(V,E)
+        ans=TopologicalSort(V,E)
+        print ans
+        if len(ans)>0:
+            print "TopologicalSort:dfs"
+            print TopologicalSort_dfs(V,E)
         
         print "\nPrim:"
 	print Prim(V,E)
