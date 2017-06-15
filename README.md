@@ -20,4 +20,4 @@ then it will run the above functions.
 *Unfortunately I don't know how to tell the loop in the nonrecurse method of dfs ToplogicalSort.    
 If you have good ideas please contact me.*
 
-###### [My Wordpress](http://imagemlt.icebluecraft.online)
+###### [My Wordpress](http://blog.imagemlt.ml)
